@@ -1,4 +1,4 @@
-package com.ge.predix.alm.cache;
+package com.ge.predix.alm.services;
 
 import org.apache.log4j.Logger;
 import org.springframework.cache.annotation.Cacheable;
