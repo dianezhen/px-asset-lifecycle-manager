@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ge.predix.alm.AlmApplicationTests" time="0.013" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="com.ge.predix.alm.AlmApplicationTests" time="0.007" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Java\jdk1.8.0_65\jre\bin"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\212356026\Documents\workspace-sts-predix-new\px-asset-lifecycle-manager"/>
+    <property name="user.dir" value="C:\Users\212356026\git\px-asset-lifecycle-manager\px-asset-lifecycle-manager"/>
     <property name="java.runtime.version" value="1.8.0_65-b17"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_65\jre\lib\endorsed"/>
@@ -25,7 +25,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Users\212356026\Documents\workspace-sts-predix-new\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf779172395586051744.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\212356026\Documents\workspace-sts-predix-new\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1248238053322708055.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Java\jdk1.8.0_65\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Java/jdk1.8.0_65/bin/../jre/bin/server;C:/Java/jdk1.8.0_65/bin/../jre/bin;C:/Java/jdk1.8.0_65/bin/../jre/lib/amd64;C:\Java\jdk1.8.0_65\bin;C:\Program Files (x86)\CA\SC\CAWIN\;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\SWTOOLS\ReadyApps;C:\Program Files (x86)\CA\SC\Csam\SockAdapter\bin;C:\Program Files (x86)\CA\DSM\bin;C:\Program Files (x86)\CA\SC\CBB\;C:\Program Files (x86)\CA\SC\CAM\bin;C:\Program Files\TortoiseSVN\bin;C:\Java\jdk1.8.0_65/bin;C:\Java\apache-maven-3.1.1\bin;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\GNU\GnuPG\pub;C:\perl\Strawberry\c\bin;C:\perl\Strawberry\perl\site\bin;C:\perl\Strawberry\perl\bin;C:\Program Files (x86)\CloudFoundry;C:\Python27;C:\cygwin64\bin;C:\ux-tool\nodejs\;C:\Users\212356026\AppData\Roaming\npm;C:\Users\212356026\Documents\software\java\spring-tool-suite-3.6.3.SR1-e4.4.1-win32-x86_64\sts-bundle\sts-3.6.3.SR1;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="contextLoads" classname="com.ge.predix.alm.AlmApplicationTests" time="0.013"/>
+  <testcase name="contextLoads" classname="com.ge.predix.alm.AlmApplicationTests" time="0.007"/>
 </testsuite>

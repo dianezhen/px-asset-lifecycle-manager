@@ -1,3 +1,4 @@
 com\ge\predix\alm\AlmApplication.class
 com\ge\predix\alm\cache\CacheConfig$1.class
+com\ge\predix\alm\services\AssetDataManagerController.class
 com\ge\predix\alm\cache\CacheConfig.class
