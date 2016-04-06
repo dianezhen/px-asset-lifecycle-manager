@@ -1,0 +1,11 @@
+applications:
+  - name: px-asset-lifecycle-manager
+    services:
+            - rmd_redis_trilokee_gupta
+            - rmd_asset_trilokee_gupta
+            - rmd_uaa_trilokee_gupta
+            - postgres-trilokee-gupta
+    env:
+      UAA_SERVER_URL: https://9a8ab5f0-cc49-47a1-aad9-89e0f49e1621.predix-uaa.run.aws-usw02-pr.ice.predix.io
+      assetUrl: https://predix-asset.run.aws-usw02-pr.ice.predix.io
+      assetZoneId: 64c8f7cd-caec-40ef-b5fc-ddb5b775a66e

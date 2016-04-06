@@ -18,41 +18,9 @@ import java.lang.reflect.Method;
 @EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
 	
-	@Value("${redis.Host}")
-	private String redisHost;
-	
-	@Value("${redis.Port}")
-	private int redisPort;
-
-	@Value("${redis.Pass}")
-	private String redisPass;
-	
 	@Value("${redis.cacheExpirationtime}")
 	private int cacheExpirationtime;
 	
-	public String getRedisHost() {
-		return redisHost;
-	}
-
-	public void setRedisHost(String redisHost) {
-		this.redisHost = redisHost;
-	}
-
-	public int getRedisPort() {
-		return redisPort;
-	}
-
-	public void setRedisPort(int redisPort) {
-		this.redisPort = redisPort;
-	}
-
-	public String getRedisPass() {
-		return redisPass;
-	}
-
-	public void setRedisPass(String redisPass) {
-		this.redisPass = redisPass;
-	}
 
 	
 	public int getCacheExpirationtime() {
@@ -63,16 +31,6 @@ public class CacheConfig extends CachingConfigurerSupport {
 		this.cacheExpirationtime = cacheExpirationtime;
 	}
 
-	@Bean
-	public JedisConnectionFactory redisConnectionFactory() {
-		JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
-
-		// Defaults
-		redisConnectionFactory.setHostName(redisHost);
-		redisConnectionFactory.setPort(redisPort);
-		redisConnectionFactory.setPassword(redisPass);
-		return redisConnectionFactory;
-	}
 
 	@Bean
 	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory cf) {

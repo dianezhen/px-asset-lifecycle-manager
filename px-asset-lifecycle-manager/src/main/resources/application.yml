@@ -1,0 +1,7 @@
+configuration:
+  projectName : Asset Lifecycle Manager
+redis:
+   service : rmd_redis_trilokee_gupta
+   cacheExpirationtime : 300
+postgres:
+   service : postgres-trilokee-gupta
