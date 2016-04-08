@@ -95,6 +95,12 @@
 			<artifactId>spring-hateoas</artifactId>
 		</dependency>
 		
+		<dependency>
+      		<groupId>com.ge.predix.solsvc</groupId>
+      		<artifactId>predix-rest-client</artifactId>
+     		<version>1.2.5</version>
+  		</dependency>
+		
 	</dependencies>
 
 	<build>

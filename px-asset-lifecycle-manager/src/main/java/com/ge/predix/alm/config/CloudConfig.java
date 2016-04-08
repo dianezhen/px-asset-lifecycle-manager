@@ -11,8 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 import com.ge.predix.alm.services.AssetDataManagerController;
+import com.ge.predix.alm.cloud.BlobstoreServiceInfo;
+import com.ge.predix.alm.cloud.AssetServiceInfo;
 
 import org.springframework.cloud.service.ServiceInfo;
+import org.springframework.cloud.service.UriBasedServiceInfo;
 import org.springframework.core.env.Environment;
 
 @Configuration
@@ -33,10 +36,6 @@ class CloudConfig extends AbstractCloudConfig {
 	private String blobstoreService;
 	
 	void setEnvironment(Environment env) {
-		System.out.println("*** SETTING ENVIRONMENT");
-		setRedisservice(env.getProperty("redis_service"));
-		setPostgresService(env.getProperty("postgres_service"));
-		setBlobstoreService(env.getProperty("blobstore_service"));
 	}
 
 	public String getRedisservice() {
@@ -70,19 +69,17 @@ class CloudConfig extends AbstractCloudConfig {
 		String redisService = env.getProperty("redis_service");
 		return connectionFactory().redisConnectionFactory(redisService);
 	}
-
-	public String getBlobstoreService() {
-		return blobstoreService;
-	}
-
-	public void setBlobstoreService(String blobstoreService) {
-		this.blobstoreService = blobstoreService;
-	}
 	
 	@Bean(name="blobstoreServiceInfo")
-	public ServiceInfo getBlobstoreSerivceInfo() {
+	public BlobstoreServiceInfo getBlobstoreSerivceInfo() {
 		String blobstoreService = env.getProperty("blobstore_service");
-		return cloud().getServiceInfo(blobstoreService);
+		return (BlobstoreServiceInfo)cloud().getServiceInfo(blobstoreService);
+	}
+	
+	@Bean(name="assetServiceInfo")
+	public AssetServiceInfo getAssetSerivceInfo() {
+		String assetService = env.getProperty("asset_service");
+		return (AssetServiceInfo)cloud().getServiceInfo(assetService);
 	}
 	// (More beans to obtain service connectors)
-}
+} 

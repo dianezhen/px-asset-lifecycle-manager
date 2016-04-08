@@ -1,11 +1,29 @@
 applications:
-  - name: px-asset-lifecycle-manager
+  - name: px-asset-lifecycle-manager-diane
+    buildpack: java_buildpack
+    path: px-asset-lifecycle-manager-0.0.1-SNAPSHOT.jar    
     services:
-            - rmd_redis_trilokee_gupta
-            - rmd_asset_trilokee_gupta
-            - rmd_uaa_trilokee_gupta
+            - rmd_redis_diane_zhen
+            - rmd_asset_diane_zhen
+            - rmd_uaa_diane_zhen
             - postgresql_diane_zhen
+            - diane_zhen_blobstore
     env:
-      UAA_SERVER_URL: https://9a8ab5f0-cc49-47a1-aad9-89e0f49e1621.predix-uaa.run.aws-usw02-pr.ice.predix.io
+      UAA_SERVER_URL: https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io
       assetUrl: https://predix-asset.run.aws-usw02-pr.ice.predix.io
-      assetZoneId: 64c8f7cd-caec-40ef-b5fc-ddb5b775a66e
+      assetZoneId: 04442ad5-53db-4a3d-ae49-8c0d12e2d907
+      predix_asset_name : rmd_asset_diane_zhen
+      SPRING_PROFILES_ACTIVE : cloud,clouddev
+      predix_userName : rmd_admin_1
+      predix_password : RMD_admin_1
+      predix_oauthRestHost : 04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io
+      predix_oauthRestPort : 80
+      predix_oauthClientId : mvp3_ref_app:mvp3ref@pp
+      accessTokenEndpointUrl : https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token
+      clientId : mvp3_ref_app
+      clientSecret: mvp3ref@pp
+      acsServiceInstanceName : rmd_acs_diane_zhen
+      redis_service : rmd_redis_diane_zhen
+      postgres_service : postgresql_diane_zhen
+      blobstore_service : diane_zhen_blobstore
+      asset_service : rmd_asset_diane_zhen

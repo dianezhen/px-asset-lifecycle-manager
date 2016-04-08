@@ -27,7 +27,7 @@ import java.io.InputStream;
 @RequestMapping(value="/domain")
 public class SchemaController {
 	
-	private static final Logger log = Logger.getLogger(AssetDataManagerController.class);
+	private static final Logger log = Logger.getLogger(SchemaController.class);
 	
 	private static final Pattern NOT_ALPHA_NUMERIC_PATTERN = Pattern.compile("[^a-zA-Z0-9]");
 	
@@ -41,8 +41,9 @@ public class SchemaController {
 		return jpaDomainRepository.findAll();
 	}
 	
+	/*
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.POST)
 	public String add(@RequestParam("domain") String domainName, 
 					  @RequestParam("schema") String schema) throws Exception {
 		//validate domain is alphanumeric
@@ -61,25 +62,8 @@ public class SchemaController {
 			throw e;
 		}
 		
-		/*
-		//upload file
-		if (!file.isEmpty()) {
-			//load to blobstore
-			blobRepo.saveFile(file);
-		}
-		else {
-			throw new Exception("File Empty"); //be more specific here
-		}
-
-		
-		//validate schema is valid JSON Schema ....
-		
-		
-		//add blobs to blobstore
-		 * */
-		
 		//store record into postgres
-		Domain domain = new Domain(domainName, "/blobURI");
+		Domain domain = new Domain(domainName, schema);
 		try {
 			jpaDomainRepository.save(domain);
 		}
@@ -89,6 +73,45 @@ public class SchemaController {
 		}
 		return domainName + "created.";
 	}
+	*/
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST,  headers = {"content-type=application/x-www-form-urlencoded"})
+	public String add(@RequestParam("domainName") String domainName, 
+			         @RequestParam("schema") String schema) 
+	    throws Exception {
+		
+		//validate domain is alphanumeric
+		System.out.println("SAVING NEW DOMAIN : " + domainName + " SCHEMA " + schema);
+		if (NOT_ALPHA_NUMERIC_PATTERN.matcher(domainName).find()) 
+			throw new Exception("Domain must be an alphanumeric with no spaces");
+		
+		//validate domain is unique
+		try {
+			if (jpaDomainRepository.exists(domainName)) {
+				throw new Exception("New Domain must be unique"); //need to be specific here
+			}
+		}
+		catch (Exception e) {
+			System.out.println("TABLE DOESN'T EXIST YET");
+			//log.error(e);
+			//e.printStackTrace();
+			//throw e;
+		}
+		
+		//store record into postgres
+		Domain domain = new Domain(domainName, schema);
+		try {
+			jpaDomainRepository.save(domain);
+		}
+		catch (Exception e) {
+			log.error(e);
+			e.printStackTrace();
+			throw e;
+		}
+		return domainName + "created.";
+	}
+	
 
 	@ResponseBody
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

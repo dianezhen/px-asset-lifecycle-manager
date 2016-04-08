@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 @Table(name= "DOMAIN")
@@ -15,15 +16,15 @@ public class Domain {
 	@Column(name="domain_name", unique=true)
 	private String domainName;
 	
-	@Column(name="schema_uri")
-	private String schemaUri;
+	@Column(name="schema", columnDefinition="TEXT NOT NULL")
+	private String schema;
 	
 	public Domain() {}
 	
-	public Domain(String name, String schemaUri) {
+	public Domain(String name, String schema) {
 		System.out.println("SAVING DOMAIN ******   DOMAIN NAME = " + name);
 		this.domainName = name;
-		this.schemaUri = schemaUri;
+		this.schema = schema;
 	}
 	
 	public String getDomainName() {
@@ -34,11 +35,11 @@ public class Domain {
 		this.domainName = name;
 	}
 
-	public String getSchemaUri() {
-		return schemaUri;
+	public String getSchema() {
+		return schema;
 	}
 	
-	public void setSchemaUri(String schemaUri) {
-		this.schemaUri = schemaUri;
+	public void setSchema(String schema) {
+		this.schema = schema;
 	}
 }
