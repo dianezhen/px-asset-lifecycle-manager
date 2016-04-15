@@ -1,11 +1,12 @@
 package com.ge.predix.alm.services;
 
-import java.util.List;
-
 public interface AssetDataManagerService {
-	
-	void createAssets();
-	void modifyAsset();
-	void deleteAsset();
-	List<Object> viewAsset();
+
+	boolean createAssets(String domain,String jsonAsset);
+
+	boolean modifyAsset(String domain, String assetID, String jsonAsset);
+
+	boolean deleteAsset(String domain, String assetID);
+
+	String viewAsset(String domain, String serachpath);
 }
