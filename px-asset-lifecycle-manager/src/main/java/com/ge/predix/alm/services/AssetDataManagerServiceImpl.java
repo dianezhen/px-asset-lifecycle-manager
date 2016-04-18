@@ -1,7 +1,7 @@
 package com.ge.predix.alm.services;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,16 +12,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.ge.predix.alm.cloud.AssetServiceInfo;
+
 @Service
 public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 
 	private static final Logger log = Logger
 			.getLogger(AssetDataManagerServiceImpl.class);
-	@Value("${asset.ZoneId}")
-	private String assetZoneId;
-
-	@Value("${asset.Url}")
-	private String assetUrl;
+	
+	@Autowired
+	private AssetServiceInfo assetServiceInfo;
+	
 
 	private RestTemplate almRestTemplate;
 
@@ -32,12 +33,12 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		// set headers
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Predix-Zone-Id", assetZoneId);
+		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		HttpEntity<String> entity = new HttpEntity<String>(
 				jsonAsset.toString(), headers);
 
 		// Get the response as string
-		ResponseEntity<String> response = template.exchange(assetUrl + "/"
+		ResponseEntity<String> response = template.exchange(assetServiceInfo.getUri() + "/"
 				+ domain, HttpMethod.POST, entity, String.class);
 		if (response.getStatusCode() != HttpStatus.OK
 				|| response.getStatusCode() != HttpStatus.NO_CONTENT) {
@@ -57,12 +58,12 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		// set headers
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Predix-Zone-Id", assetZoneId);
+		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		HttpEntity<String> entity = new HttpEntity<String>(
 				jsonAsset.toString(), headers);
 
 		// Get the response as string
-		ResponseEntity<String> response = template.exchange(assetUrl + "/"
+		ResponseEntity<String> response = template.exchange(assetServiceInfo.getUri() + "/"
 				+ domain + "/" + assetID, HttpMethod.PUT, entity, String.class);
 		if (response.getStatusCode() != HttpStatus.OK
 				|| response.getStatusCode() != HttpStatus.NO_CONTENT) {
@@ -82,11 +83,11 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		// set headers
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("Predix-Zone-Id", assetZoneId);
+		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 		// Get the response as string
-		ResponseEntity<String> response = template.exchange(assetUrl + "/"
+		ResponseEntity<String> response = template.exchange(assetServiceInfo.getUri() + "/"
 				+ domain + "/" + assetID, HttpMethod.DELETE, entity,
 				String.class);
 		if (response.getStatusCode() != HttpStatus.OK
@@ -108,9 +109,9 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		String resp = null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		headers.set("Predix-Zone-Id", assetZoneId);
+		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(
-				assetUrl + "/" + domain).queryParam("requestData", req);
+				assetServiceInfo.getUri() + "/" + domain).queryParam("requestData", req);
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		almRestTemplate = new RestTemplate();
 		ResponseEntity<String> response = almRestTemplate
