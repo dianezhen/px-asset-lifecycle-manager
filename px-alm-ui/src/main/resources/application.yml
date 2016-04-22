@@ -1,0 +1,28 @@
+spring:
+  aop:
+    proxy-target-class: true
+   
+security:
+   user:
+     password: none
+   oauth2:
+     resource: 
+       userInfoUri: https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/authorize
+     client:
+       accessTokenUri: https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token
+       userAuthorizationUri: https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/authorize
+       clientId: mvp3_ref_app
+       clientSecret: mvp3ref@pp
+       
+zuul:
+  routes:
+    resource:
+      path: /resource/**
+      url: http://px-asset-lifecycle-manager-diane2.run.aws-usw02-pr.ice.predix.io/domain
+    user:
+      path: /user/**
+      url: https://04442ad5-53db-4a3d-ae49-8c0d12e2d907.predix-uaa.run.aws-usw02-pr.ice.predix.io
+       
+logging:
+  level:
+    org.springframework.security: DEBUG
