@@ -14,16 +14,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.ge.predix.alm.cloud.AssetServiceInfo;
 
+
 @Service
 public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 
 	private static final Logger log = Logger
 			.getLogger(AssetDataManagerServiceImpl.class);
 	
-	@Autowired
+	@Autowired(required=true)
 	private AssetServiceInfo assetServiceInfo;
 	
-
+	@Autowired(required=true)
+	private UaaTokenManager uaaTokenManager;
+	
 	private RestTemplate almRestTemplate;
 
 	@Override
@@ -34,6 +37,7 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
+		headers.set(HttpHeaders.AUTHORIZATION, "Bearer " +uaaTokenManager.getUAAToken());
 		HttpEntity<String> entity = new HttpEntity<String>(
 				jsonAsset.toString(), headers);
 
@@ -58,6 +62,7 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		// set headers
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set(HttpHeaders.AUTHORIZATION, "Bearer " +uaaTokenManager.getUAAToken());
 		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		HttpEntity<String> entity = new HttpEntity<String>(
 				jsonAsset.toString(), headers);
@@ -83,6 +88,7 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		// set headers
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set(HttpHeaders.AUTHORIZATION, "Bearer " +uaaTokenManager.getUAAToken());
 		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 
@@ -108,12 +114,20 @@ public class AssetDataManagerServiceImpl implements AssetDataManagerService {
 		Object req = new Object();
 		String resp = null;
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		String uaaToken = uaaTokenManager.getUAAToken();
+		log.info("UAA Token within View Asset Call = " + uaaToken);
+		headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + uaaToken);
+		log.info("Predix-Zon-id = " + assetServiceInfo.getZoneId());
 		headers.set("Predix-Zone-Id", assetServiceInfo.getZoneId());
+		
+//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(
+//				assetServiceInfo.getUri() + "/" + domain).queryParam("requestData", req);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(
-				assetServiceInfo.getUri() + "/" + domain).queryParam("requestData", req);
+				assetServiceInfo.getUri() + "/" + domain);
+
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		almRestTemplate = new RestTemplate();
+		log.info("view Asset URI = " + builder.build().encode().toUri());
 		ResponseEntity<String> response = almRestTemplate
 				.exchange(builder.build().encode().toUri(), HttpMethod.GET,
 						entity, String.class);

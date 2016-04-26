@@ -1,7 +1,8 @@
 configuration:
   projectName : Asset Lifecycle Manager
 redis:
-   service : rmd_redis_trilokee_gupta
    cacheExpirationtime : 300
-postgres:
-   service : postgresql_diane_zhen
+oauth:
+   clientID : mvp3_ref_app
+   clientSecret : mvp3ref@pp
+   grantType : client_credentials
