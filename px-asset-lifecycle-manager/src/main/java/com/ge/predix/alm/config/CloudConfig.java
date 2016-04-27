@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
-import com.ge.predix.alm.cloud.BlobstoreServiceInfo;
 import com.ge.predix.alm.cloud.AssetServiceInfo;
 import com.ge.predix.alm.cloud.UaaServiceInfo;
 
@@ -68,12 +67,7 @@ class CloudConfig extends AbstractCloudConfig {
 		return connectionFactory().redisConnectionFactory(redisService);
 	}
 	
-	@Bean(name="blobstoreServiceInfo")
-	public BlobstoreServiceInfo getBlobstoreSerivceInfo() {
-		String blobstoreService = env.getProperty("blobstore_service");
-		return (BlobstoreServiceInfo)cloud().getServiceInfo(blobstoreService);
-	}
-	
+
 	@Bean(name="assetServiceInfo")
 	public AssetServiceInfo getAssetSerivceInfo() {
 		String assetService = env.getProperty("asset_service");

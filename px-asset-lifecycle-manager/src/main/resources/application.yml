@@ -6,3 +6,8 @@ oauth:
    clientID : mvp3_ref_app
    clientSecret : mvp3ref@pp
    grantType : client_credentials
+url:
+   error : home
+spring:
+  thymeleaf:
+    cache: false 
