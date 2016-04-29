@@ -69,11 +69,12 @@
     </div>
     <script>
            function addDomain() {
-               var domain = document.getElementById('domain');
-               var schemaText = document.getElementById('schemaText');
+               var domain = document.getElementById('domain').value;
+               var schemaText = document.getElementById('schemaText').value;
                var xhttp = new XMLHttpRequest();
                xhttp.open("POST", "domain", true);
-               xhttp.send("fname=Henry&lname=Ford");
+               xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+               xhttp.send("domainName=" + domain + "&schema=" + schemaText);
            }
     </script>
         

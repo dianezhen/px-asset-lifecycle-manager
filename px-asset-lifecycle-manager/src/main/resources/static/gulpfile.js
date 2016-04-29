@@ -4,6 +4,8 @@ var path = require('path');
 //gulp load plugins makes a short cut for any npm module starting with 'gulp-'
 var $ = require('gulp-load-plugins')();
 
+var request = require('request').defaults({'proxy': 'http://sjc1intproxy01.crd.ge.com:8080/'});
+
 gulp.task('default', function(done) {
 	gulp.src('.')
 	.pipe($.webserver({
