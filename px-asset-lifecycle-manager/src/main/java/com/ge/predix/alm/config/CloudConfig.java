@@ -28,8 +28,7 @@ class CloudConfig extends AbstractCloudConfig {
 
 	private String postgresservice;
 	
-	private String blobstoreService;
-	
+
 	private String uaaservice;
 	
 	void setEnvironment(Environment env) {
@@ -77,7 +76,11 @@ class CloudConfig extends AbstractCloudConfig {
 	@Bean(name="uaaServiceInfo")
 	public UaaServiceInfo getUaaSerivceInfo() {
 		String uaaservice = env.getProperty("uaa_service");
-		return (UaaServiceInfo)cloud().getServiceInfo(uaaservice);
+		UaaServiceInfo userSvcInfo = (UaaServiceInfo)cloud().getServiceInfo(uaaservice);
+		userSvcInfo.setClientID(env.getProperty("uaa_clientid"));
+		userSvcInfo.setClientSecret(env.getProperty("uaa_clientsecret"));
+		userSvcInfo.setGrantType(env.getProperty("uaa_granttype"));
+		return userSvcInfo;
 	}
 	
 	@Bean

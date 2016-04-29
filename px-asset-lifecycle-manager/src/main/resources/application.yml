@@ -2,12 +2,9 @@ configuration:
   projectName : Asset Lifecycle Manager
 redis:
    cacheExpirationtime : 300
-oauth:
-   clientID : mvp3_ref_app
-   clientSecret : mvp3ref@pp
-   grantType : client_credentials
 url:
    error : home
 spring:
-  thymeleaf:
-    cache: false 
+  devtools:
+    remote:
+      secret: myalm

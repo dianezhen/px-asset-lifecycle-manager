@@ -21,21 +21,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ge.predix.alm.cloud.UaaServiceInfo;
 
 @Component
-public class UaaTokenManager  {
+public class UaaTokenManager {
 	private static final Logger log = Logger.getLogger(UaaTokenManager.class);
 
-	@Value("${oauth.clientID}")
-	private String clientID;
-
-	@Value("${oauth.clientSecret}")
-	private String clientSecret;
-
-	@Value("${oauth.grantType}")
-	private String grantType;
 
 	@Autowired
 	private UaaServiceInfo uaaServiceInfo;
-
 
 	public String getUAAToken() {
 		log.info("Inside Getting a new Token");
@@ -43,17 +34,20 @@ public class UaaTokenManager  {
 		String uaaToken = "";
 
 		RestTemplate template = new RestTemplate();
+		log.info("UAA Credentials : " + uaaServiceInfo.getClientID() + " : "
+				+ uaaServiceInfo.getClientSecret() + " : "
+				+ uaaServiceInfo.getGrantType());
 		// set headers & req
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-		String auth = clientID + ":" + clientSecret;
+		String auth = uaaServiceInfo.getClientID() + ":" + uaaServiceInfo.getClientSecret();
 		byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset
 				.forName("US-ASCII")));
 		String authHeader = "Basic " + new String(encodedAuth);
 		headers.set("Authorization", authHeader);
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(
 				uaaServiceInfo.getUri() + "/oauth/token").queryParam(
-				"grant_type", grantType);
+				"grant_type", uaaServiceInfo.getGrantType());
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		// Get the response as string
 		ResponseEntity<String> response = template.exchange(builder.build()
@@ -76,7 +70,7 @@ public class UaaTokenManager  {
 			} catch (NullPointerException ex) {
 				log.error("UAA Token is NULL.");
 				ex.printStackTrace();
-			}  
+			}
 			log.info("Access Token = " + uaaToken);
 		}
 		log.info("Out of Getting a new Token");

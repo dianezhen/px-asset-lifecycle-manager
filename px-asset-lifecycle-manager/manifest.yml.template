@@ -1,0 +1,17 @@
+applications:
+  - name: px-asset-lifecycle-manager
+    services:
+            - <REDIS_SERVICE>
+            - <POSTGRES_SERVICE>
+            - <ASSET_SERVICE>
+            - <UAA_SERVICE>
+    env:
+      redis_service : <REDIS_SERVICE>
+      postgres_service : <POSTGRES_SERVICE>
+      asset_service : <ASSET_SERVICE> 
+      uaa_service : <UAA_SERVICE>
+      uaa_clientid : <UAA_CLIENTID>
+      uaa_clientsecret : <UAA_CLIENTSECRET>
+      uaa_granttype : client_credentials
+      cacheexpiration : 300
+      JAVA_OPTS: "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"
