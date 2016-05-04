@@ -1,0 +1,4 @@
+applications:
+  - name: boot-temp
+    buildpack: java_buildpack  
+    path: boot.jar

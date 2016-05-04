@@ -1,5 +1,7 @@
 applications:
-  - name: px-asset-lifecycle-manager
+  - name: <APP_NAME>
+    buildpack: java_buildpack
+    path: target/px-asset-lifecycle-manager-0.0.1-SNAPSHOT.jar            
     services:
             - <REDIS_SERVICE>
             - <POSTGRES_SERVICE>
