@@ -1,7 +1,9 @@
 <px-card header-text="Domain Schemas" class="layout--flush flex--stretch">
     <div class="flex flex--stretch">
         <div class="flex__item list">
-            <button type="button" class="btn btn-default btn-block" ui-sref="app.schema.new">Create New</button>
+            <div class="shaded">
+               <button type="button" class="btn btn-default" ui-sref="app.schema.new">Create New</button>
+            </div>
             <div ng-repeat="curDomain in main.domains" ui-sref-active="selected" ui-sref="app.schema.detail({ domain: curDomain.domainName })">
                 {{curDomain.domainName}}
             </div>

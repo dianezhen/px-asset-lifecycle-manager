@@ -30,6 +30,15 @@ angular.module('app.pages.objects.controller',['ui.router', 'schemaForm', 'app.s
 				}
 			}
 		})
+		.state('app.objects.bulk', {
+			url: "/new/bulk",
+			views: {
+				'object_details': {
+					templateUrl: 'app/pages/objects/objects.bulk.controller.html',
+					controller: 'objectBulkController as objectBulk'
+				}
+			}
+		})
 })
 
 .controller('objectsController', function ($scope, $stateParams, objectManager) {
@@ -92,6 +101,30 @@ angular.module('app.pages.objects.controller',['ui.router', 'schemaForm', 'app.s
 		console.log(saveModel);
 		
 		objectManager.resource.addObjectForDomain({domain: $scope.objects.domainObj.domainName}, [saveModel]).$promise.then(function(data) {
+			$state.go('app.objects', {domain: $scope.objects.domainObj.domainName},{reload: true});
+		}, function(error) {
+			alert(error.data.message);
+			console.log(error);
+		});
+		
+	}
+})
+
+.controller('objectBulkController', function ($scope, $state, $stateParams, objectManager) {
+	var objectBulk = this;
+	
+	objectBulk.save = function() {
+		var saveModel = {};
+		try {
+			saveModel = JSON.parse(objectBulk.model);
+		}
+		catch(exception) {
+			alert('Unable to parse JSON');
+			return;
+		}
+	
+		
+		objectManager.resource.addObjectForDomain({domain: $scope.objects.domainObj.domainName}, saveModel).$promise.then(function(data) {
 			$state.go('app.objects', {domain: $scope.objects.domainObj.domainName},{reload: true});
 		}, function(error) {
 			alert(error.data.message);

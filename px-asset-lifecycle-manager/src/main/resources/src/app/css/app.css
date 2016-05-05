@@ -30,3 +30,6 @@
 .list > div.loadCont {
   border-bottom-width:0rem;
 }
+.shaded {
+	background-color: #efefef;
+}
