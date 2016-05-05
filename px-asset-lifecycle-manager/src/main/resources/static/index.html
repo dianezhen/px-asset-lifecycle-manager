@@ -63,6 +63,11 @@
                         Schema <textarea id="schemaText" placeholder="enter scheme here"></textarea><br/>
                         <button type="button" onClick="addDomain()">Upload Schema</button>
                     </px-card>
+                    <px-card header-text="Add New Instance">
+                        Street Address <input id="street" type="text"/><br/>
+                        City <input id="city" type="text"/><br/>
+                        <button type="button" onClick="addDomainInstance()">Add asset</button>
+                    </px-card>
                 </section>
             </main>
         </div>
@@ -75,6 +80,40 @@
                xhttp.open("POST", "domain", true);
                xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                xhttp.send("domainName=" + domain + "&schema=" + schemaText);
+           }
+           function addDomainInstance() {
+               var street = document.getElementById('street').value;
+               var city = document.getElementById('city').value;
+               
+               var assets = [];
+               assets.push(
+                   {
+                       uri: "/ContactInfo/" + street,
+                       streetAddress: street,
+                       city: city
+                   }
+               );
+               
+               var xhttp = new XMLHttpRequest();
+               xhttp.open("POST", "api/adm/v1/createAssets?domain=ContactInfo", true);
+               xhttp.setRequestHeader("Content-Type", "application/json");
+               xhttp.send(JSON.stringify(assets));
+           }
+           function getDomainInstances() {
+               var xhttp = new XMLHttpRequest();
+               xhttp.open("GET", "api/adm/v1/viewAssets?domain=ContactInfo", true);
+               xhttp.addEventListener("load", addDomainsToDom);
+               xhttp.send();
+           }
+           function getDomains() {
+               var xhttp = new XMLHttpRequest();
+               xhttp.open("GET", "domain", true);
+               xhttp.addEventListener("load", addDomainsToDom);
+               xhttp.send();
+           }
+           function addDomainsToDom(evn) {
+               var domains = JSON.parse(evn.target.response);
+               console.log(domains);
            }
     </script>
         

@@ -1,0 +1,15 @@
+<px-card header-text="Domain Schemas" class="layout--flush flex--stretch">
+    <div class="flex flex--stretch">
+        <div class="flex__item list">
+            <button type="button" class="btn btn-default btn-block" ui-sref="app.schema.new">Create New</button>
+            <div ng-repeat="curDomain in main.domains" ui-sref-active="selected" ui-sref="app.schema.detail({ domain: curDomain.domainName })">
+                {{curDomain.domainName}}
+            </div>
+            
+        </div>
+        <div class="flex__item list--details" ui-view="schema_details">
+            
+        </div>
+    </div>
+    
+</px-card>
