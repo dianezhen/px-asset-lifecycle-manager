@@ -1,0 +1,15 @@
+<div>
+    <h3 ng-if="schemaDetail.isNew">Create New</h3>
+    <h2 ng-if="!schemaDetail.isNew">{{schemaDetail.domainObj.domainName}}</h2>
+        <div class="form-group" ng-if="schemaDetail.isNew">
+            <label for="domain">Domain</label>
+            <input type="text" class="form-control" id="domain" placeholder="DomainName" ng-model="schemaDetail.domainObj.domainName">
+        </div>
+        <div class="form-group">
+            <label for="schemaText">JSON Schema</label>
+            <textarea ng-model="schemaDetail.domainObj.schema" class="form-control" rows="15" id="schemaText" placeholder="{enter schema here}"></textarea>
+            <span id="helpBlock" class="help-block">Don't have a schema defined? Use a sample JSON object to create one at <a href="http://jsonschema.net/" target="_blank">JSONSchema.net</a></span>
+        </div>
+        <button ng-if="schemaDetail.isNew" type="button" class="btn btn-primary" ng-click="schemaDetail.create()">Create</button>
+        <button ng-if="!schemaDetail.isNew" type="button" class="btn btn-primary" ng-click="schemaDetail.update()">Update</button>
+</div>

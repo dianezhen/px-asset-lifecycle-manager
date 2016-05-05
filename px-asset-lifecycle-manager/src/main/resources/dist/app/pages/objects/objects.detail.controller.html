@@ -1,0 +1,13 @@
+<div>
+    <h3 ng-if="objectDetails.isNew">Create New</h3>
+    <h2 ng-if="!objectDetails.isNew">{{objectDetails.model.uri}}</h2>
+    <div class="form-group" ng-if="objectDetails.isNew">
+        <label for="uri">URI</label>
+        <div class="input-group">
+            <span class="input-group-addon">/{{objects.domainObj.domainName}}/</span>
+            <input type="text" class="form-control" id="uri" placeholder="id" ng-model="objectDetails.model.uriDisplay">
+        </div>
+    </div>
+    <div sf-schema="objectDetails.schema" sf-form="objectDetails.form" sf-model="objectDetails.model"></div>
+    <button type="button" class="btn btn-primary" ng-click="objectDetails.save()">Save</button>
+</div>
