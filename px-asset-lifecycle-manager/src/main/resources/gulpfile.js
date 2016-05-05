@@ -11,7 +11,7 @@ var $ = require('gulp-load-plugins')();
 var version = '1';
 
 var OUT_ROOT	= '.';
-var OUT_DIR 	= OUT_ROOT + '/dist';
+var OUT_DIR 	= OUT_ROOT + '/static';
 var OUT_APP 	= OUT_DIR + '/app';
 var OUT_CSS 	= OUT_DIR + '/styles';
 var OUT_ASSETS 	= OUT_DIR + '/assets';
@@ -108,7 +108,7 @@ gulp.task('minify-html', ['clean'], function () {
 
 	return APP_HTML
 		.pipe($.minifyHtml({conditionals:true, comments: true, loose: true}))
-		.pipe($.angularTemplatecache('templates.js', {module:'app', root:'dist/', base: function(file) { return file.base.replace(__dirname +'/src', '') + file.relative; }}))
+		.pipe($.angularTemplatecache('templates.js', {module:'app', root:'static/', base: function(file) { return file.base.replace(__dirname +'/src', '') + file.relative; }}))
 		.pipe($.rename({suffix: '.min'}))
 		.pipe(gulp.dest(OUT_APP))
 });
