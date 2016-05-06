@@ -98,7 +98,8 @@ def getVcapJsonForPredixBoot (config):
 def deployAndBindUAAToPredixBoot(config):
 	print("Deploying to boot app CF...")
         os.chdir(config.masterDir + config.predixbootJSRRepoName)
-	pushStatus = cfPush('cf push','boot-temp')
+        configureBootTempManifest(config, os.getcwd())
+	pushStatus = cfPush('cf push ',"boot-temp")
 	print("Deployment to CF done.")
         os.chdir(config.masterDir)
 		        
@@ -317,6 +318,23 @@ def configureManifest(config, manifestLocation):
 	with open(manifestLocation+'/manifest.yml', 'r') as fin:
 		print (fin.read())
 
+
+def configureBootTempManifest(config, manifestLocation):
+	# create a backup
+	if os.path.isfile(manifestLocation + "/manifest.yml"):
+		shutil.copy(manifestLocation+"/manifest.yml", manifestLocation+"/manifest.yml.bak")
+	# copy template as manifest
+	shutil.copy(manifestLocation+"/manifest.yml.template", manifestLocation+"/manifest.yml")
+	s = open(manifestLocation+"/manifest.yml").read()
+
+        s = s.replace('<APP_NAME>', config.predixbootAppName)
+
+	f = open(manifestLocation+"/manifest.yml", 'w')
+	f.write(s)
+	f.close()
+	with open(manifestLocation+'/manifest.yml', 'r') as fin:
+		print (fin.read())
+                
 #####################################################################################################
 ############################### main methods ###############################
 #####################################################################################################
@@ -486,6 +504,7 @@ def deployALMAppCreateAsset(config):
 	                if statementStatus == 1 :
 		                sys.exit("Error binding a uaa service instance to boot ")
 
+                        time.sleep(10)  # Delay for 10 seconds                                        
 	                statementStatus  = subprocess.call("cf restage "+config.predixbootAppName, shell=True)
                         if statementStatus == 1 :
 			        sys.exit("Error restaging a uaa service instance to boot")

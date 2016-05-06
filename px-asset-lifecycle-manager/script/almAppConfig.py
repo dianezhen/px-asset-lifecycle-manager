@@ -74,7 +74,7 @@ try:
     allDeploy = "y"
     continueFrom = "all"    
     only = ""
-    newDeployment = "Y"
+    newDeployment = "N"
     fastinstall = 'n'
     artifactoryrepo = ""
     artifactoryuser = ""
@@ -144,7 +144,7 @@ predixbootJSRRepoName = "\\boot"
 
 # Predix Application Names
 print ('instanceAppender=' + instanceAppender)
-predixbootAppName = "boot-temp"
+predixbootAppName = "boot-temp-" + instanceAppender
 uiAppName = "px-asset-lifecycle-manager"
 
 if environment == 'PROD':
