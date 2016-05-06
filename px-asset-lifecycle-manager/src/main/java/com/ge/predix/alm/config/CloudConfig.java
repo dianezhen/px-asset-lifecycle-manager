@@ -1,8 +1,9 @@
 package com.ge.predix.alm.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
-import com.ge.predix.alm.services.AssetDataManagerController;
-import com.ge.predix.alm.cloud.BlobstoreServiceInfo;
 import com.ge.predix.alm.cloud.AssetServiceInfo;
+import com.ge.predix.alm.cloud.UaaServiceInfo;
 
-import org.springframework.cloud.service.ServiceInfo;
-import org.springframework.cloud.service.UriBasedServiceInfo;
 import org.springframework.core.env.Environment;
 
 @Configuration
@@ -28,12 +26,10 @@ class CloudConfig extends AbstractCloudConfig {
 	
 	private String redisservice;
 
-	@Value("${redis.cacheExpirationtime}")
-	private int cacheExpirationtime;
-
 	private String postgresservice;
 	
-	private String blobstoreService;
+
+	private String uaaservice;
 	
 	void setEnvironment(Environment env) {
 	}
@@ -70,16 +66,31 @@ class CloudConfig extends AbstractCloudConfig {
 		return connectionFactory().redisConnectionFactory(redisService);
 	}
 	
-	@Bean(name="blobstoreServiceInfo")
-	public BlobstoreServiceInfo getBlobstoreSerivceInfo() {
-		String blobstoreService = env.getProperty("blobstore_service");
-		return (BlobstoreServiceInfo)cloud().getServiceInfo(blobstoreService);
-	}
-	
+
 	@Bean(name="assetServiceInfo")
 	public AssetServiceInfo getAssetSerivceInfo() {
 		String assetService = env.getProperty("asset_service");
 		return (AssetServiceInfo)cloud().getServiceInfo(assetService);
 	}
-	// (More beans to obtain service connectors)
+	
+	@Bean(name="uaaServiceInfo")
+	public UaaServiceInfo getUaaSerivceInfo() {
+		String uaaservice = env.getProperty("uaa_service");
+		UaaServiceInfo userSvcInfo = (UaaServiceInfo)cloud().getServiceInfo(uaaservice);
+		userSvcInfo.setClientID(env.getProperty("uaa_clientid"));
+		userSvcInfo.setClientSecret(env.getProperty("uaa_clientsecret"));
+		userSvcInfo.setGrantType(env.getProperty("uaa_granttype"));
+		return userSvcInfo;
+	}
+	
+	@Bean
+	public Properties applicationProp() {
+		Properties resp = this.cloud().getCloudProperties();
+
+		for (Object akey : resp.keySet()) {
+			log.info("Key = " + akey.toString() + " & Value = " + resp.get(akey).toString());
+		}
+		return resp;
+	}
+
 } 

@@ -1,0 +1,66 @@
+{
+  "name": "myNew",
+  "description": "My New Project",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/app/**/*.*",
+  "dependencies": {
+    "angular": "~1.3.14",
+    "angular-ui-router": "~0.2.13",
+    "angular-resource": "~1.3.5",
+    "underscore": "~1.7.0",
+    "jquery": "~2.1.3",
+    "polymer": "~v1.2.3",
+    "px": "https://github.com/PredixDev/px.git#~v1.3.0",
+    "px-app-nav": "https://github.com/PredixDev/px-app-nav.git#~v1.0.5",
+    "px-card": "https://github.com/PredixDev/px-card.git#~v0.2.3",
+    "px-theme": "https://github.com/PredixDev/px-theme.git#~v0.6.5",
+    "angular-schema-form": "~0.8.13"
+  },
+  "resolutions": {
+    "angular": "~1.3.14",
+    "px": "~v1.3.0"
+  },
+  "overrides": {
+    "angular": {
+      "dependencies": "jquery"
+    },
+    "px-theme": {
+      "main": [
+        "px-theme.html",
+        "px-app.html"
+      ]
+    },
+    "web-animations-js": {
+      "main": [
+        "web-animations*.*"
+      ]
+    },
+    "px-card": {
+      "main": [
+        "px-card.html",
+        "px-card-header.html",
+        "css/px-card.css",
+        "css/px-card-header.css"
+      ]
+    },
+    "px-app-nav": {
+      "main": [
+        "px-app-nav.html",
+        "css/px-app-nav.css"
+      ]
+    },
+    "px-typography-design": {
+      "main": [
+        "type/*.*"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "scss/font-awesome.scss",
+        "fonts/*.*"
+      ]
+    }
+  }
+}
