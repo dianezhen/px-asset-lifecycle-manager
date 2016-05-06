@@ -3,7 +3,7 @@
 Predix Asset Lifecycle Manager App
 ==================================
 
-The Predix Asset Lifecycle Manager app provides a UI integration into the Predix Asset service to instantiate, manager and decommission assets.  The application includes a Domain Schema input to allow the users to upload JSON schemas that will be used by the app for form generation and input validation.
+The Predix Asset Lifecycle Manager app provides a UI integration into the Predix Asset service to instantiate, edit and decommission assets.  The application includes Schema input functionality to allow the users to upload JSON schemas that will be used by the app for form generation and input validation.
 
 To install
 
