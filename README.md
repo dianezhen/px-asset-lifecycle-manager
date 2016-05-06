@@ -12,12 +12,10 @@ To install
    <li>Maven</li>
    <li>Python</li>
    <li>On Windows you will need a Cygwin install with CURL</li>
+   <li> if behind a proxy you will need to set your proxy settings (see <a href="https://www.predix.io/docs/?b=#Uva9INX3">Getting Started</a>)</li>
     </ol>
 
-2. Clone the repository to your machine
-
-	  git clone https://github.comXXXXXXXXXXX/px-asset-lifecycle-manager.git
-	  cd px-asset-lifecycle-manager
+2. Clone the repository to your machine and change directory into px-asset-lifecycle-manager
 
 3. Run the install script. (You will be required to login to cloud foundry)
   ** Note, you can change environment attribute assignments in the script/almAppConfig.py file.
